@@ -33,9 +33,13 @@ export default function Home(): JSX.Element {
     return pagesData?.flat();
   }, [data]);
 
-  // TODO RENDER LOADING SCREEN
+  if (isLoading || isFetchingNextPage) {
+    return <Loading />;
+  }
 
-  // TODO RENDER ERROR SCREEN
+  if (isError) {
+    return <Error />;
+  }
 
   return (
     <>
