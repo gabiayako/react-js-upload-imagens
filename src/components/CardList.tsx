@@ -33,7 +33,7 @@ export function CardList({ cards }: CardsProps): JSX.Element {
           <Card data={card} viewImage={handleViewImage} />
         ))}
       </SimpleGrid>
-      <ModalViewImage isOpen={isOpen} onClose={onClose} imgUrl={imageUrl} />;
+      <ModalViewImage isOpen={isOpen} onClose={onClose} imgUrl={imageUrl} />
     </>
   );
 }
