@@ -32,7 +32,7 @@ export default function Home(): JSX.Element {
     return pagesData?.flat();
   }, [data]);
 
-  if (isLoading || isFetchingNextPage) {
+  if (isLoading) {
     return <Loading />;
   }
 
@@ -40,13 +40,26 @@ export default function Home(): JSX.Element {
     return <Error />;
   }
 
+  const handleButtonClick = () => {
+    if (hasNextPage) {
+      fetchNextPage();
+    }
+  };
+
   return (
     <>
       <Header />
 
       <Box maxW={1120} px={20} mx="auto" my={20}>
         <CardList cards={formattedData} />
-        {/* TODO RENDER LOAD MORE BUTTON IF DATA HAS NEXT PAGE */}
+        <Button
+          isDisabled={!hasNextPage}
+          onClick={handleButtonClick}
+          bg="#DD6B20"
+          mt="2rem"
+        >
+          {isFetchingNextPage ? 'Carregando...' : 'Carregar mais'}
+        </Button>
       </Box>
     </>
   );
