@@ -78,7 +78,7 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
         return;
       }
 
-      await mutation.mutateAsync(data);
+      await mutation.mutateAsync({ ...data, url: imageUrl });
 
       if (mutation.isSuccess) {
         toast({
