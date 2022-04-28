@@ -10,10 +10,7 @@ import { Error } from '../components/Error';
 
 export default function Home(): JSX.Element {
   const fetchImages = ({ pageParam = null }) => {
-    if (pageParam) {
-      return api.get(`/api/images?after=${pageParam}`);
-    }
-    return api.get('/api/images?after=1');
+    return api.get(`/api/images`, { params: { pageParam } });
   };
 
   const {
@@ -52,14 +49,11 @@ export default function Home(): JSX.Element {
 
       <Box maxW={1120} px={20} mx="auto" my={20}>
         <CardList cards={formattedData} />
-        <Button
-          isDisabled={!hasNextPage}
-          onClick={handleButtonClick}
-          bg="#DD6B20"
-          mt="2rem"
-        >
-          {isFetchingNextPage ? 'Carregando...' : 'Carregar mais'}
-        </Button>
+        {hasNextPage ? (
+          <Button onClick={handleButtonClick} bg="#DD6B20" mt="2rem">
+            {isFetchingNextPage ? 'Carregando...' : 'Carregar mais'}
+          </Button>
+        ) : null}
       </Box>
     </>
   );
